@@ -130,17 +130,14 @@ st.pyplot(fig)
 
 st.subheader("Highest and Lowest Performing Product Category by Number of Order")
 
-
 fig, axes = plt.subplots(1, 2, figsize=(14, 6), gridspec_kw={"width_ratios": [2, 1]})
-
-colors = ["blue", "lightgrey", "lightgrey", "lightgrey", "lightgrey"]
 
 
 sns.barplot(
     x="order_count",
     y="category",
     data=category_sum_order_df.head(5),
-    palette=colors,
+    palette='gnuplot_r',  
     ax=axes[0],
 )
 axes[0].set_ylabel(None)
@@ -149,6 +146,14 @@ axes[0].set_title("Highest Performing Product Category", loc="center", fontsize=
 axes[0].tick_params(axis="x", labelsize=14)
 axes[0].tick_params(axis="y", labelsize=14)
 
+
+sns.barplot(
+    x="order_count",
+    y="category",
+    data=category_sum_order_df.tail(5),  
+    palette='gnuplot_r', 
+    ax=axes[1],
+)
 axes[1].set_ylabel(None)
 axes[1].set_xlabel(None)
 axes[1].invert_xaxis()
@@ -159,7 +164,6 @@ axes[1].tick_params(axis="x", labelsize=14)
 axes[1].tick_params(axis="y", labelsize=14)
 
 st.pyplot(fig)
-
 
 
 
@@ -180,48 +184,5 @@ ax.set_title("Top 10 Cities by Revenue")
 
 # Tampilkan plot di Streamlit
 st.pyplot(fig)
-
-
-st.subheader("Highest and Lowest Performing Product Category by Revenue (R$)")
-
-# Membuat figure dengan 2 subplot
-fig, axes = plt.subplots(1, 2, figsize=(14, 6), gridspec_kw={"width_ratios": [2, 1]})
-
-colors = ["blue", "lightgrey", "lightgrey", "lightgrey", "lightgrey"]
-
-# Plot untuk best product category by revenue
-sns.barplot(
-    x="revenue",
-    y="category",
-    data=category_revenue_df.head(5),
-    palette=colors,
-    ax=axes[0],
-)
-axes[0].set_ylabel(None)
-axes[0].set_xlabel(None)
-axes[0].set_title("Highest Revenue Categories", loc="center", fontsize=16)
-axes[0].tick_params(axis="x", labelsize=14)
-axes[0].tick_params(axis="y", labelsize=14)
-
-# Plot untuk worst product category
-sns.barplot(
-    x="revenue",
-    y="category",
-    data=category_revenue_df.sort_values(by="revenue", ascending=True).head(5),
-    palette=colors,
-    ax=axes[1],
-)
-axes[1].set_ylabel(None)
-axes[1].set_xlabel(None)
-axes[1].invert_xaxis()
-axes[1].yaxis.set_label_position("right")
-axes[1].yaxis.tick_right()
-axes[1].set_title("Lowest Revenue Categories", loc="center", fontsize=16)
-axes[1].tick_params(axis="x", labelsize=14)
-axes[1].tick_params(axis="y", labelsize=14)
-
-st.pyplot(fig)
-
-
 
 st.caption("Copyright (c) Gybran Khairul Anam 2024")
